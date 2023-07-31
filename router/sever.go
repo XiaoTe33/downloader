@@ -70,10 +70,11 @@ func downloadSlice(c *gin.Context) {
 
 	buf := make([]byte, bufSize)
 	_, e = f.ReadAt(buf, offset)
-	_, _ = c.Writer.Write(buf)
+
 	if e == io.EOF {
-		c.Status(201)
+		c.Header("Done", "OK")
 	}
+	_, _ = c.Writer.Write(buf)
 
 }
 
